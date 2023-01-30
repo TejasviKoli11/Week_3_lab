@@ -29,16 +29,14 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
         String num1 = request.getParameter("num_one");
         String num2 = request.getParameter("num_two");
         
-//        int n1 = Integer.parseInt(num1);
-//        int n2 = Integer.parseInt(num2);
-        
+        request.setAttribute("num_one", num1);
+        request.setAttribute("num_two", num2);
+        request.setAttribute("result", "--");
         
         String operation = request.getParameter("operation");
         
-        String msg = "Result: ";
-        
         if(num1 == null || num1.equals("")|| num2 == null || num2.equals("")){
-            request.setAttribute("result", "Result: Invalid");
+            request.setAttribute("result", "Invalid");
             getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
         }
         else{
@@ -51,8 +49,7 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
                 {
                     int answer = n1 + n2;
                     String ans = String.valueOf(answer);
-                    String message = msg + ans;
-                    request.setAttribute("result", message);
+                    request.setAttribute("result", ans);
                     getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
                     break;
                 }
@@ -60,8 +57,7 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
                 {
                     int answer = n1 - n2;
                     String ans = String.valueOf(answer);
-                    String message = msg + ans;
-                    request.setAttribute("result", message);
+                    request.setAttribute("result", ans);
                     getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
                     break;
                 }
@@ -69,8 +65,7 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
                 {
                     int answer = n1 * n2;
                     String ans = String.valueOf(answer);
-                    String message = msg + ans;
-                    request.setAttribute("result", message);
+                    request.setAttribute("result", ans);
                     getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
                     break;
                 }
@@ -78,21 +73,14 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
                 {
                     int answer = n1 / n2;
                     String ans = String.valueOf(answer);
-                    String message = msg + ans;
-                    request.setAttribute("result", message);
+                    request.setAttribute("result", ans);
                     getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
                     break;
                 }
                 default:
-                {
-                    String ans = "--";
-                    String message = msg + ans;
-                    request.setAttribute("result", message);
-                    getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
-                    break;
-                }
             }
         }
+        getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
        
     }
 }
