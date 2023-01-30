@@ -29,26 +29,71 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
         String num1 = request.getParameter("num_one");
         String num2 = request.getParameter("num_two");
         
-        double n1 = Double.parseDouble(num1);
-        double n2 = Double.parseDouble(num2);
+//        int n1 = Integer.parseInt(num1);
+//        int n2 = Integer.parseInt(num2);
         
         
-        String op = request.getParameter("operation");
+        String operation = request.getParameter("operation");
         
-        if(op.equals("+")){
-          double result = n1+n2;
-          
-          String answer = String.valueOf("result");
-          
-          request.setAttribute("op", answer);
-          
-          getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
-          
+        String msg = "Result: ";
+        
+        if(num1 == null || num1.equals("")|| num2 == null || num2.equals("")){
+            request.setAttribute("result", "Result: Invalid");
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
         }
-      
+        else{
             
-    
-        getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
+            int n1 = Integer.parseInt(num1);
+            int n2 = Integer.parseInt(num2);
+            
+            switch (operation) {
+                case "+":
+                {
+                    int answer = n1 + n2;
+                    String ans = String.valueOf(answer);
+                    String message = msg + ans;
+                    request.setAttribute("result", message);
+                    getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
+                    break;
+                }
+                case "-":
+                {
+                    int answer = n1 - n2;
+                    String ans = String.valueOf(answer);
+                    String message = msg + ans;
+                    request.setAttribute("result", message);
+                    getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
+                    break;
+                }
+                case "*":
+                {
+                    int answer = n1 * n2;
+                    String ans = String.valueOf(answer);
+                    String message = msg + ans;
+                    request.setAttribute("result", message);
+                    getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
+                    break;
+                }
+                case "/":
+                {
+                    int answer = n1 / n2;
+                    String ans = String.valueOf(answer);
+                    String message = msg + ans;
+                    request.setAttribute("result", message);
+                    getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
+                    break;
+                }
+                default:
+                {
+                    String ans = "--";
+                    String message = msg + ans;
+                    request.setAttribute("result", message);
+                    getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculator.jsp").forward(request,response);
+                    break;
+                }
+            }
+        }
+       
     }
-
 }
+
